@@ -83,35 +83,36 @@ public class Num {
     }
 
     static int romeToArab(String a) {
-        //Создали массив римских цифр где значение риского числа равно номеру элемента массива
-        String[] rimNumbers = {
-                "0",
-                "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-                "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
-                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX",
-                "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
-                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L",
-                "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
-                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
-                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
-                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
-                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
-
-
-        int num = 0;
-
-        for (int i = 0; i <= 100; i++) {
-            if (a.equals(rimNumbers[i])) {
-                num = i;
-                i = 100;
+        int ans = 0, num = 0;
+        for (int i = a.length() - 1; i >= 0; i--) {
+            switch (a.charAt(i)) {
+                case 'I':
+                    num = 1;
+                    break;
+                case 'V':
+                    num = 5;
+                    break;
+                case 'X':
+                    num = 10;
+                    break;
+                case 'L':
+                    num = 50;
+                    break;
+                case 'C':
+                    num = 100;
+                    break;
+                case 'D':
+                    num = 500;
+                    break;
+                case 'M':
+                    num = 1000;
+                    break;
             }
+            if (4 * num < ans) ans -= num;
+            else ans += num;
         }
+        return ans;
 
-        if (num == 0) {
-            num = Integer.parseInt(a);
-        }
-
-        return (num);
     }
 
     static boolean rimTrue(String a) {
